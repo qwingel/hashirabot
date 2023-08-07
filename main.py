@@ -35,11 +35,11 @@ def online_now(message):
     msgg = ''
     msgg = get_server_info() + '\n'
     
-    if(a2s.info(addrs_server).player_count > 0):
-        msgg = '\n' + msgg + '\n' \
-            + '=-----------------------=' + '\n' \
-            + get_players() + '\n' \
-            + '=-----------------------=' + '\n'
+    # if(a2s.info(addrs_server).player_count > 0):
+    #     msgg = '\n' + msgg + '\n' \
+    #         + '=-----------------------=' + '\n' \
+    #         + get_players() + '\n' \
+    #         + '=-----------------------=' + '\n'
         
     tgbot.send_message(chat_id, msgg, parse_mode='html')
     
