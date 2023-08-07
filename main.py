@@ -49,8 +49,7 @@ def all(message):
     for i in range(len(play_members)):
         if play_members[i] != '': 
             msgg += '\n' + '@' + play_members[i]
-    # tgbot.send_message(chat_id, msgg)
-    print(msgg)
+    tgbot.send_message(chat_id, msgg)
     
 @tgbot.message_handler(commands=['play', 'noplay'])
 def set_member_status(message):
