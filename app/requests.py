@@ -18,7 +18,7 @@ def index():
                 players_data[i] = result
 
     print(data)
-    return result, get_players_data
+    return result, players_data
 
 @module.post("/delete")
 def clear_data():
@@ -33,7 +33,7 @@ def clear_data():
                 players_data[i] = ''
     
     print(data)
-    return result, get_players_data
+    return result, players_data
 
 def get_players_data():
     players = players_data
