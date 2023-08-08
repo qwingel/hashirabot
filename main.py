@@ -90,8 +90,8 @@ def author(message):
 def main():
     while True:
         try:
-            waitress.serve(app=create_app(), port=80)
             tgbot.polling(none_stop=True)
+            waitress.serve(app=create_app(), port=80)
         except Exception as e:
             time.sleep(3)
             print(str(e))
