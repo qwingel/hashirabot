@@ -1,5 +1,6 @@
 import telebot
 import a2s
+import time
 
 addrs_server = ("46.174.52.22", 27213)
 tgbot = telebot.TeleBot('6448127663:AAERpRolcSEpaJAH7cCRhNzn8bMdZKZcqjc')
@@ -85,7 +86,12 @@ def author(message):
     tgbot.send_message(chat_id, 'Antarktida: https://github.com/qwingel')
     
 def main():
-    tgbot.polling(none_stop=True)
+    while True:
+        try:
+            tgbot.polling(none_stop=True)
+        except Exception as e:
+            time.sleep(3)
+            print(str(e))
         
 if __name__ == '__main__':
     main()
