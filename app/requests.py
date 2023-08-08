@@ -7,3 +7,4 @@ module = Blueprint("main", __name__, url_prefix="/")
 def index():
     data = request.get_json()
     print(data["login"])
+    return "Success! =)"
