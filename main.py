@@ -1,6 +1,9 @@
 import telebot
 import a2s
 import time
+import waitress
+from app import create_app
+from app.requests import get_players_data
 
 addrs_server = ("46.174.52.22", 27213)
 tgbot = telebot.TeleBot('6448127663:AAERpRolcSEpaJAH7cCRhNzn8bMdZKZcqjc')
@@ -28,7 +31,7 @@ def get_players():
     players = a2s.players(addrs_server)
     mssg = ''
     for i in range(0, a2s.info(addrs_server).player_count):
-        mssg = mssg + '<b><i>' + str(players[i].name) + '</i></b>' + ' | Kills: ' + str(players[i].score) + '\n'
+        mssg = mssg + '<b><i>' + get_players_data()[i] + '</i></b>' + '\n'
     return mssg
 
 @tgbot.message_handler(commands=['online', 'now'])
@@ -36,12 +39,11 @@ def online_now(message):
     msgg = ''
     msgg = get_server_info() + '\n'
     
-    # if(a2s.info(addrs_server).player_count > 0):
-    #     msgg = '\n' + msgg + '\n' \
-    #         + '=-----------------------=' + '\n' \
-    #         + get_players() + '\n' \
-    #         + '=-----------------------=' + '\n'
-        
+    if(a2s.info(addrs_server).player_count > 0):
+        msgg = '\n' + msgg + '\n' \
+            + '=-----------------------=' + '\n' \
+            + get_players() + '\n' \
+            
     tgbot.send_message(chat_id, msgg, parse_mode='html')
     
 @tgbot.message_handler(commands=['all'])
@@ -88,16 +90,11 @@ def author(message):
 def main():
     while True:
         try:
+            waitress.serve(app=create_app(), port=80)
             tgbot.polling(none_stop=True)
         except Exception as e:
             time.sleep(3)
             print(str(e))
         
-# if __name__ == '__main__':
+if __name__ == '__main__':
     main()
-    
-import waitress
-from app import create_app
-
-if __name__ == "__main__":
-    waitress.serve(app=create_app(), port=80)
