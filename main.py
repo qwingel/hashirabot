@@ -93,11 +93,11 @@ def main():
             time.sleep(3)
             print(str(e))
         
-if __name__ == '__main__':
+# if __name__ == '__main__':
     main()
     
-# import waitress
-# from app import create_app
+import waitress
+from app import create_app
 
-# if __name__ == "__main__":
-#     waitress.serve(app=create_app(), port=2525)
+if __name__ == "__main__":
+    waitress.serve(app=create_app(), port=80)
