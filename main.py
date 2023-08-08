@@ -28,10 +28,10 @@ def get_server_info():
     return mssg
     
 def get_players():
-    players = a2s.players(addrs_server)
+    players = get_players_data()
     mssg = ''
     for i in range(0, a2s.info(addrs_server).player_count):
-        mssg = mssg + '<b><i>' + get_players_data()[i] + '</i></b>' + '\n'
+        mssg = mssg + '<b><i>' + players[i] + '</i></b>' + '\n'
     return mssg
 
 @tgbot.message_handler(commands=['online', 'now'])
