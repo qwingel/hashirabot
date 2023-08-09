@@ -31,7 +31,6 @@ def get_server_info():
     
 def get_players():
     players = get_players_data()
-    print('123', players)
     mssg = ''
     for i in range(0, len(players)):
         mssg = mssg + '<b><i>' + players[i] + '</i></b>' + '\n'
@@ -42,7 +41,7 @@ def online_now(message):
     msgg = ''
     msgg = get_server_info() + '\n'
     
-    if(a2s.info(addrs_server).player_count > 0):
+    if(a2s.info(addrs_server).player_count >= 0):
         msgg = '\n' + msgg + '\n' \
             + '=-----------------------=' + '\n' \
             + get_players() + '\n' \
