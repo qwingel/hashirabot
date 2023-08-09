@@ -2,6 +2,8 @@ import telebot
 import a2s
 import time
 import waitress
+import threading
+from asyncio import new_event_loop, set_event_loop
 from app import create_app
 from app.requests import get_players_data
 
@@ -86,15 +88,30 @@ def set_member_status(message):
 @tgbot.message_handler(commands=['author'])
 def author(message):
     tgbot.send_message(chat_id, 'Antarktida: https://github.com/qwingel')
-    
-def main():
+
+def bot_polling():
     while True:
         try:
+            set_event_loop(new_event_loop())
             tgbot.polling(none_stop=True)
-            waitress.serve(app=create_app(), port=80)
         except Exception as e:
             time.sleep(3)
             print(str(e))
-        
+
+def start_sserv():
+    waitress.serve(app=create_app(), port=80)
+
+bot_thread = threading.Thread(target=bot_polling)
+bot_thread.daemon = True
+bot_thread.start()
+
+app_thread = threading.Thread(target=start_sserv)
+app_thread.daemon = True
+app_thread.start()
+
 if __name__ == '__main__':
-    main()
+    while True:
+        try:
+            time.sleep(1)
+        except KeyboardInterrupt:
+            break
