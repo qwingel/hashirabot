@@ -16,6 +16,7 @@ def index():
         for i in range(len(players_data)):
             if(players_data[i] == ''):
                 players_data[i] = result
+                break
 
     print(data)
     return result
