@@ -12,10 +12,10 @@ chat_id = -1001951718196
 
 chat_members = ['alexandertruewig', 'dxnteee', 'mtmrphosis ', 'b0lLb', 'Flamethrower1337 ', 'destinyfire', 'speedgainer', \
     'barakudboy', 'mex13370', 'galyapypsik', 'l0l0l0l0l0l00l', 'young_sakura', 'haikoro', 'mightyskrudge', 'girlsarethesame',\
-    'cloudy1337']
+    'cloudy1337', 'Lukaa']
 
-noplay_members = ['' for i in range(tgbot.get_chat_member_count(chat_id))]
-play_members = chat_members
+play_members = ['' for i in range(tgbot.get_chat_member_count(chat_id))]
+noplay_members = chat_members
 print(noplay_members)
 print(play_members)
 
@@ -30,7 +30,7 @@ def get_server_info():
 def get_players():
     players = get_players_data()
     mssg = ''
-    for i in range(0, a2s.info(addrs_server).player_count):
+    for i in range(0, len(players)):
         mssg = mssg + '<b><i>' + players[i] + '</i></b>' + '\n'
     return mssg
 
@@ -44,7 +44,7 @@ def online_now(message):
             + '=-----------------------=' + '\n' \
             + get_players() + '\n' \
             
-    tgbot.send_message(chat_id, msgg, parse_mode='html')
+    tgbot.send_message(message.chat.id, msgg, parse_mode='html')
     
 @tgbot.message_handler(commands=['all'])
 def all(message):
