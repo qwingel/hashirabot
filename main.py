@@ -39,7 +39,7 @@ def get_players():
             list = players[i].split(' ')
 
         print(list)
-        mssg = mssg + '<b><i>' + list[0] + '</i></b>' + '<a href="' + list[2] + '">inline URL</a>' +'\n'
+        mssg = mssg + '<b><i>' + list[0] + '</i></b>' + '<a href="' + list[2] + '">  Steam </a>' +'\n'
     return mssg
 
 @tgbot.message_handler(commands=['online', 'now'])
@@ -47,7 +47,7 @@ def online_now(message):
     msgg = ''
     msgg = get_server_info() + '\n'
     
-    if(a2s.info(addrs_server).player_count >= 0):
+    if(a2s.info(addrs_server).player_count > 0):
         msgg = '\n' + msgg + '\n' \
             + '=-----------------------=' + '\n' \
             + get_players() + '\n' \
