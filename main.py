@@ -31,6 +31,7 @@ def get_server_info():
     
 def get_players():
     players = get_players_data()
+    print(players)
     mssg = ''
     for i in range(0, len(players)):
         mssg = mssg + '<b><i>' + players[i] + '</i></b>' + '\n'
