@@ -33,7 +33,8 @@ def get_players():
     players = get_players_data()
     mssg = ''
     for i in range(0, len(players)):
-        mssg = mssg + '<b><i>' + players[i] + '</i></b>' + '\n'
+        list = players[i].split()
+        mssg = mssg + '<b><i>' + list[0] + '</i></b>' + '<a href="' + list[2] + '">inline URL</a>' +'\n'
     return mssg
 
 @tgbot.message_handler(commands=['online', 'now'])
