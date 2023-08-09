@@ -33,7 +33,12 @@ def get_players():
     players = get_players_data()
     mssg = ''
     for i in range(0, len(players)):
-        list = players[i].split()
+        if(players[i] == ''):
+            break
+        else:
+            list = players[i].split(' ')
+
+        print(list)
         mssg = mssg + '<b><i>' + list[0] + '</i></b>' + '<a href="' + list[2] + '">inline URL</a>' +'\n'
     return mssg
 
