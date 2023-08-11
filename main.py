@@ -47,7 +47,7 @@ def online_now(message):
     msgg = ''
     msgg = get_server_info() + '\n'
     
-    if(a2s.info(addrs_server).player_count > 0):
+    if(a2s.info(addrs_server).player_count >= 0):
         msgg = '\n' + msgg + '\n' \
             + '=-----------------------=' + '\n' \
             + get_players() + '\n' \
