@@ -7,14 +7,14 @@ from asyncio import new_event_loop, set_event_loop
 from app import create_app
 from app.requests import get_players_data
 
+chat_id = -1001978613104
+
 addrs_server = ("46.174.52.22", 27213)
 tgbot = telebot.TeleBot('6448127663:AAERpRolcSEpaJAH7cCRhNzn8bMdZKZcqjc')
 
-chat_id = -1001951718196
-
 chat_members = ['alexandertruewig', 'dxnteee', 'mtmrphosis ', 'b0lLb', 'Flamethrower1337 ', 'destinyfire', 'speedgainer', \
     'barakudboy', 'mex13370', 'galyapypsik', 'l0l0l0l0l0l00l', 'young_sakura', 'haikoro', 'mightyskrudge', 'girlsarethesame',\
-    'cloudy1337', 'Lukaa']
+    'cloudy1337', 'Lukaa', 'officialfugu', 'zhunissov1', 'dani_el_busy', 'den1sk0v']
 
 play_members = ['' for i in range(tgbot.get_chat_member_count(chat_id))]
 noplay_members = chat_members
@@ -44,6 +44,7 @@ def get_players():
 
 @tgbot.message_handler(commands=['online', 'now'])
 def online_now(message):
+    print(chat_id)
     msgg = ''
     msgg = get_server_info() + '\n'
     
