@@ -58,10 +58,13 @@ def online_now(message):
 @tgbot.message_handler(commands=['all'])
 def all(message):
     msgg = ''
+    if play_members.count('') > len(play_members) - 1:
+        return
+    
     for i in range(len(play_members)):
         if play_members[i] != '': 
             msgg += '\n' + '@' + play_members[i]
-    tgbot.send_message(chat_id, msgg)
+    tgbot.send_message(message.chat.id, msgg)
     
 @tgbot.message_handler(commands=['play', 'noplay'])
 def set_member_status(message):
@@ -75,10 +78,12 @@ def set_member_status(message):
             for i in range(len(noplay_members)):
                 if noplay_members[i] == username:
                     noplay_members[i] = ''
+                    break
 
             for i in range(len(play_members)):
                 if play_members[i] == '':
                     play_members[i] = username
+                    break
                 
     elif cmd == 'noplay':
         if username in noplay_members:
@@ -87,10 +92,12 @@ def set_member_status(message):
             for i in range(len(play_members)):
                 if play_members[i] == username:
                     play_members[i] = ''
+                    break
 
             for i in range(len(noplay_members)):
                 if noplay_members[i] == '':
                     noplay_members[i] = username
+                    break
                 
 @tgbot.message_handler(commands=['author'])
 def author(message):
