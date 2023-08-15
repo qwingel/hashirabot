@@ -6,8 +6,7 @@ players_data = ['' for i in range(32)]
 
 @module.post("/")
 def index():
-    data = request.get_json()
-
+    data = request.get_data()
     PlayerSDATA = data["PlayerSDATA"]
 
     if PlayerSDATA not in players_data:
@@ -21,7 +20,7 @@ def index():
 
 @module.post("/delete")
 def clear_data():
-    data = request.get_json()
+    data = request.get_data()
 
     PlayerSDATA = data["PlayerSDATA"]
     if PlayerSDATA in players_data:
