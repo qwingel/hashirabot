@@ -37,7 +37,7 @@ def get_players():
             list = players[i].split(' ')
 
         print(list)
-        mssg = mssg + '<b><i>' + list[0] + '</i></b>' + '<a href="' + list[2] + '">  Steam </a>' +'\n'
+        mssg = mssg + '<b><i>' + list[0] + '</i></b>' + '<a href="' + list[1] + '">  Steam </a>' +'\n'
     return mssg
 
 @tgbot.message_handler(commands=['online', 'now'])
