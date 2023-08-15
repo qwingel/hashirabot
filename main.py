@@ -5,7 +5,6 @@ import waitress
 import threading
 from asyncio import new_event_loop, set_event_loop
 from app import create_app
-from app.requests import get_players_data
 
 chat_id = -1001978613104
 
@@ -28,16 +27,12 @@ def get_server_info():
     return mssg
     
 def get_players():
-    players = get_players_data()
+    players = a2s.players(addrs_server)
     mssg = ''
     for i in range(0, len(players)):
-        if(players[i] == ''):
-            break
-        else:
-            list = players[i].split(' ')
-
-        print(list)
-        mssg = mssg + '<b><i>' + list[0] + '</i></b>' + '<a href="' + list[1] + '">  Steam </a>' +'\n'
+        msgg = msgg + '\n' + players[i].name
+        print(msgg)
+        
     return mssg
 
 @tgbot.message_handler(commands=['online', 'now'])
