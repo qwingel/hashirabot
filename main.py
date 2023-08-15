@@ -28,12 +28,12 @@ def get_server_info():
     
 def get_players():
     players = a2s.players(addrs_server)
-    mssg = ''
+    msgg = ''
     for i in range(0, len(players)):
-        msgg = msgg + '\n' + players[i].name
-        print(msgg)
+        msgg = msgg + '\n' + '> ' + '<b>' + str(players[i].name) + '</b>'
+
         
-    return mssg
+    return msgg
 
 @tgbot.message_handler(commands=['online', 'now'])
 def online_now(message):
@@ -41,10 +41,11 @@ def online_now(message):
     msgg = ''
     msgg = get_server_info() + '\n'
     
-    if(a2s.info(addrs_server).player_count >= 0):
+    if(a2s.info(addrs_server).player_count > 0):
         msgg = '\n' + msgg + '\n' \
-            + '=-----------------------=' + '\n' \
+            + '=-----------------------=' \
             + get_players() + '\n' \
+            + '=-----------------------='
             
     tgbot.send_message(message.chat.id, msgg, parse_mode='html')
     
