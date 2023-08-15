@@ -7,29 +7,27 @@ players_data = ['' for i in range(32)]
 @module.post("/")
 def index():
     data = request.get_data()
-    PlayerSDATA = data["PlayerSDATA"]
 
-    if PlayerSDATA not in players_data:
+    if data not in players_data:
         for i in range(len(players_data)):
             if(players_data[i] == ''):
-                players_data[i] = PlayerSDATA
+                players_data[i] = data
                 break
 
     print(data)
-    return PlayerSDATA
+    return data
 
 @module.post("/delete")
 def clear_data():
     data = request.get_data()
-
-    PlayerSDATA = data["PlayerSDATA"]
-    if PlayerSDATA in players_data:
+    
+    if data in players_data:
         for i in range(len(players_data)):
-            if(players_data[i] == PlayerSDATA):
+            if(players_data[i] == data):
                 players_data[i] = ''
     
     print(data)
-    return PlayerSDATA
+    return data
 
 def get_players_data():
     players = players_data
