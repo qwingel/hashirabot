@@ -17,8 +17,6 @@ chat_members = ['alexandertruewig', 'dxnteee', 'mtmrphosis ', 'b0lLb', 'Flamethr
     'cloudy1337', 'Lukaa', 'officialfugu', 'zhunissov1', 'dani_el_busy', 'den1sk0v']
 
 play_members = ['' for i in range(tgbot.get_chat_member_count(chat_id))]
-noplay_members = chat_members
-print(noplay_members)
 print(play_members)
 
 def get_server_info():
@@ -72,31 +70,17 @@ def set_member_status(message):
     cmd = list[0]
     username = message.from_user.username
     if(cmd == 'play'):
-        if username in play_members:
-            return
-        if username in noplay_members:
-            for i in range(len(noplay_members)):
-                if noplay_members[i] == username:
-                    noplay_members[i] = ''
-                    break
-
+        if username not in play_members:
             for i in range(len(play_members)):
                 if play_members[i] == '':
                     play_members[i] = username
                     break
                 
     elif cmd == 'noplay':
-        if username in noplay_members:
-            return
         if username in play_members:
             for i in range(len(play_members)):
                 if play_members[i] == username:
                     play_members[i] = ''
-                    break
-
-            for i in range(len(noplay_members)):
-                if noplay_members[i] == '':
-                    noplay_members[i] = username
                     break
                 
 @tgbot.message_handler(commands=['author'])
