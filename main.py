@@ -8,7 +8,14 @@ from app import create_app
 
 chat_id = -1001978613104
 
-addrs_server = ("46.174.52.22", 27213)
+hashira_address = ("5.35.8.24", 27015)
+hkz_address = ("46.174.52.22", 27225)
+
+file = "kz-rec.txt"
+records_file = open(file, "rt", encoding='utf-8')
+records_list = list(records_file)
+count_lines = sum(1 for line in open(file, "r"))
+
 tgbot = telebot.TeleBot('6448127663:AAERpRolcSEpaJAH7cCRhNzn8bMdZKZcqjc')
 
 chat_members = ['alexandertruewig', 'dxnteee', 'mtmrphosis ', 'b0lLb', 'Flamethrower1337 ', 'destinyfire', 'speedgainer', \
@@ -18,8 +25,14 @@ chat_members = ['alexandertruewig', 'dxnteee', 'mtmrphosis ', 'b0lLb', 'Flamethr
 play_members = ['' for i in range(tgbot.get_chat_member_count(chat_id))]
 print(play_members)
 
+def get_cosy_record(map):
+    for i in range(count_lines):
+        list = records_list[i].split()
+        if(map in list):
+            print(records_list[i])
+    
 def get_server_info():
-    info = a2s.info(addrs_server)
+    info = a2s.info(hashira_address)
     mssg = ''
     mssg = str(info.server_name) + '\n' + '<b>Online:</b> ' \
         + str(info.player_count) + '/' + str(info.max_players) \
@@ -27,7 +40,7 @@ def get_server_info():
     return mssg
     
 def get_players():
-    players = a2s.players(addrs_server)
+    players = a2s.players(hashira_address)
     msgg = ''
     for i in range(0, len(players)):
         msgg = msgg + '\n' + '> ' + '<b>' + str(players[i].name) + '</b>'
@@ -35,20 +48,43 @@ def get_players():
         
     return msgg
 
+def get_hkz_info():
+    info = a2s.info(hkz_address)
+    players = a2s.players(hkz_address)
+    mssg = ''
+    mssg = str(info.server_name) + '\n' + '<b>Online:</b> ' \
+        + str(info.player_count) + '/' + str(info.max_players) \
+        + '\n' + '<b>Map:</b> ' + str(info.map_name)
+    
+    msgg = ''
+    record = ''
+    for i in range(len(players)):
+        if(players[i].score < 0):
+            record = '<b>Server Record:</b>' + str(players[i].name)
+        else:
+            msgg = get_cosy_record(info.map_name) + '\n\n'
+            msgg = msgg + '\n' + '> ' + str(players[i].name)
+        
+    return mssg + '\n' + record + '\n' + msgg 
+
 @tgbot.message_handler(commands=['online', 'now'])
-def online_now(message):
-    print(chat_id)
+def online_hashira_now(message):
     msgg = ''
     msgg = get_server_info() + '\n'
     
-    if(a2s.info(addrs_server).player_count > 0):
+    if(a2s.info(hashira_address).player_count > 0):
         msgg = '\n' + msgg + '\n' \
             + '=-----------------------=' \
             + get_players() + '\n' \
             + '=-----------------------='
             
     tgbot.send_message(message.chat.id, msgg, parse_mode='html')
-    
+
+@tgbot.message_handler(commands=['hkz'])
+def online_hkz_now(message):
+    msgg = get_hkz_info()
+    tgbot.send_message(message.chat.id, msgg, parse_mode='html')
+
 @tgbot.message_handler(commands=['all'])
 def all(message):
     msgg = ''
