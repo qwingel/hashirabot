@@ -6,10 +6,10 @@ import threading
 from asyncio import new_event_loop, set_event_loop
 from app import create_app
 
-chat_id = -1001978613104
+chat_id = 123
 
-hashira_address = ("5.35.8.24", 27015)
-hkz_address = ("46.174.52.22", 27225)
+hashira_address = ("IP", 11111)
+hkz_address = ("IP", 11111)
 
 file = "kz-rec.txt"
 records_file = open(file, "rt", encoding='utf-8')
@@ -114,10 +114,6 @@ def set_member_status(message):
                 if play_members[i] == username:
                     play_members[i] = ''
                     break
-                
-@tgbot.message_handler(commands=['author'])
-def author(message):
-    tgbot.send_message(chat_id, 'Antarktida: https://github.com/qwingel')
 
 def bot_polling():
     while True:
