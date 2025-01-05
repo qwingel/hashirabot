@@ -16,11 +16,11 @@ records_file = open(file, "rt", encoding='utf-8')
 records_list = list(records_file)
 count_lines = sum(1 for line in open(file, "r"))
 
-tgbot = telebot.TeleBot('6448127663:AAERpRolcSEpaJAH7cCRhNzn8bMdZKZcqjc')
+tgbot = telebot.TeleBot('')
 
-chat_members = ['alexandertruewig', 'dxnteee', 'mtmrphosis ', 'b0lLb', 'Flamethrower1337 ', 'destinyfire', 'speedgainer', \
-    'barakudboy', 'mex13370', 'galyapypsik', 'l0l0l0l0l0l00l', 'young_sakura', 'haikoro', 'mightyskrudge', 'girlsarethesame',\
-    'cloudy1337', 'Lukaa', 'officialfugu', 'zhunissov1', 'dani_el_busy', 'den1sk0v']
+chat_members = [
+    
+]
 
 play_members = ['' for i in range(tgbot.get_chat_member_count(chat_id))]
 print(play_members)
